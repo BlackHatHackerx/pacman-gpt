@@ -59,16 +59,16 @@ bool OnUserUpdate(float fElapsedTime, int rx, int ry, int ghostX, int ghostY,boo
                 
                 
                 if(color==4)
-                    nodeEnd = &nodes[(ry/nNodeSize) * nMapWidth + rx/nNodeSize];
+                    nodeStart = &nodes[(ry/nNodeSize) * nMapWidth + rx/nNodeSize];
                 if(up==true&&color==5&&ry<300)
-                    nodeEnd = &nodes[(ry/nNodeSize-2) * nMapWidth + rx/nNodeSize];
+                    nodeStart = &nodes[(ry/nNodeSize-2) * nMapWidth + rx/nNodeSize];
                 if(down==true&&color==5&&ry<300)
-                    nodeEnd = &nodes[(ry/nNodeSize+2) * nMapWidth + rx/nNodeSize];
+                    nodeStart = &nodes[(ry/nNodeSize+2) * nMapWidth + rx/nNodeSize];
                 if(left==true&&color==5&&ry<300)
-                    nodeEnd = &nodes[ry/nNodeSize * nMapWidth + rx/nNodeSize-2];
+                    nodeStart = &nodes[ry/nNodeSize * nMapWidth + rx/nNodeSize-2];
                 if(right==true&&color==5&&ry<300)
-                    nodeEnd = &nodes[ry/nNodeSize * nMapWidth + rx/nNodeSize+2];
-                    nodeStart = &nodes[ghostY/nNodeSize * nMapWidth + ghostX/nNodeSize];
+                    nodeStart = &nodes[ry/nNodeSize * nMapWidth + rx/nNodeSize+2];
+                    nodeEnd = &nodes[ghostY/nNodeSize * nMapWidth + ghostX/nNodeSize];
                 
                 
                 
@@ -298,8 +298,8 @@ int main()
 cout<<highscore;
     srand(time(NULL));
     
-    int ghostRedX=(rand()%18)*20+20;
-    int ghostRedY=(rand()%18)*20+20;
+    int ghostRedX=300;
+    int ghostRedY=300;
     nodes= new sNode[nMapWidth * nMapHeight];
     for(int x=0; x<nMapWidth ;x++)
     {
@@ -534,7 +534,7 @@ cout<<highscore;
                 }
             }
         }
-         if(ghostX+10>rx-10&&ghostX<rx+10&&ghostY+20>ry-10&&ghostY<ry+10)
+         if(ghostX+10>rx-10&&ghostX<rx+10&&ghostY+20>ry-10&&ghostY<ry+10||ghostRedX+10>rx-10&&ghostRedX<rx+10&&ghostRedY+20>ry-10&&ghostRedY<ry+10)
      {
         if(circlepresent==false)
         {
