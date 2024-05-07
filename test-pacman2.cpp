@@ -47,16 +47,7 @@ bool OnUserUpdate(float fElapsedTime, int rx, int ry, int ghostX, int ghostY,boo
     int nNodeSize = 20;
     int nNodeBorder = 1;
     
-   int nSelectedNodeX = mousex() / nNodeSize;
-    int nSelectedNodeY = mousey() / nNodeSize;
-    int x=mousex();
-    int y=mousey();
-    setcolor(WHITE);
-    
-        if(nSelectedNodeX >= 0 && nSelectedNodeX < nMapWidth)
-            if(nSelectedNodeY >=0 && nSelectedNodeY < nMapHeight)
-            {
-                
+  
                 
                 if(color==4)
                     nodeStart = &nodes[(ry/nNodeSize) * nMapWidth + rx/nNodeSize];
@@ -74,7 +65,7 @@ bool OnUserUpdate(float fElapsedTime, int rx, int ry, int ghostX, int ghostY,boo
                 
 
                 Solve_AStar();
-            }
+            
     
     
    
@@ -114,15 +105,7 @@ bool OnUserUpdate(float fElapsedTime, int ghostX, int ghostY)
     int nNodeSize = 20;
     int nNodeBorder = 1;
     
-   int nSelectedNodeX = mousex() / nNodeSize;
-    int nSelectedNodeY = mousey() / nNodeSize;
-    int x=mousex();
-    int y=mousey();
-    setcolor(WHITE);
-    
-        if(nSelectedNodeX >= 0 && nSelectedNodeX < nMapWidth)
-            if(nSelectedNodeY >=0 && nSelectedNodeY < nMapHeight)
-            {
+   
                 
                 
                 
@@ -131,7 +114,7 @@ bool OnUserUpdate(float fElapsedTime, int ghostX, int ghostY)
                 
 
                 Solve_AStar();
-            }
+            
     
     
    
@@ -298,8 +281,8 @@ int main()
 cout<<highscore;
     srand(time(NULL));
     
-    int ghostRedX=300;
-    int ghostRedY=300;
+    int ghostRedX=320;
+    int ghostRedY=320;
     nodes= new sNode[nMapWidth * nMapHeight];
     for(int x=0; x<nMapWidth ;x++)
     {
