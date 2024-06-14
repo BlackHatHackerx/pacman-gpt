@@ -12,7 +12,15 @@
 #include <list>
 #include <math.h>
 #include <fstream>
-using namespace std;
+
+
+
+
+
+
+
+
+
 
 int death=0;
 int rx= 30;
@@ -88,7 +96,7 @@ bool OnUserUpdate(float fElapsedTime, int rx, int ry, int ghostX, int ghostY,boo
             {
                 setcolor(color);
                 setlinestyle(SOLID_LINE,1,3);
-                line(10 ,10, 100,100);
+                
                 line(p->x*nNodeSize + nNodeSize/2,p->y*nNodeSize + nNodeSize / 2,
                 p->parent->x*nNodeSize + nNodeSize / 2, p->parent->y*nNodeSize + nNodeSize / 2 );
 
@@ -137,7 +145,7 @@ bool OnUserUpdate(float fElapsedTime, int ghostX, int ghostY)
             {
                 setcolor(RED);
                 setlinestyle(SOLID_LINE,1,3);
-                line(10 ,10, 100,100);
+                
                 line(p->x*nNodeSize + nNodeSize/2,p->y*nNodeSize + nNodeSize / 2,
                 p->parent->x*nNodeSize + nNodeSize / 2, p->parent->y*nNodeSize + nNodeSize / 2 );
 
@@ -222,7 +230,7 @@ void Solve_AStar()
     }
 }
 
-void outstream(ostringstream& out,int x,int y);
+void outstream(std::ostringstream& out,int x,int y);
 void draw_grid(int x[],int y[],int GRID_SIZE)
 {
     for(int i=0;i<GRID_SIZE;i++)
@@ -254,11 +262,17 @@ int ghostRedvx=0; int ghostRedvy=0;
 int highscore=0;
 int main()
 {
+	
+ 
+
+
+
+	
     std::ifstream infile("highscore-list.txt");
     if(infile.is_open()){
         std::string line;
         while(std::getline(infile, line)){
-            cout<<"Highscore: "<<line<<endl;
+            std::cout<<"Highscore: "<<line<<std::endl;
             highscore=stoi(line);
         }
         infile.close();
@@ -270,7 +284,7 @@ int main()
     if(file.is_open()){
         std::string line;
         while(std::getline(file,line)){
-            cout<<"Deaths: "<<line<<endl;
+            std::cout<<"Deaths: "<<line<<std::endl;
             death=stoi(line);
         }
         file.close();
@@ -278,7 +292,7 @@ int main()
     else{
         std::cerr << "Error opening file for reading.\n";
     }
-cout<<highscore;
+std::cout<<highscore;
     srand(time(NULL));
     
     int ghostRedX=320;
@@ -317,9 +331,9 @@ cout<<highscore;
     const std::chrono::milliseconds frameTime(3500 / targetFPS);
 
     
-    random_device rd;
-    mt19937 mt(rd());
-    uniform_int_distribution<int> dist(20,400);
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist(20,400);
     
     srand(time(NULL));
     const int GRID_SIZE=20;
@@ -566,7 +580,7 @@ cout<<highscore;
         if(outfile.is_open())
         {
             death++;
-            outfile<<death<<endl;
+            outfile<<death<<std::endl;
             outfile.close();
         }
         else{
@@ -811,6 +825,8 @@ for(int i=0;i<20;i++)
             if(ghostFlagRed==true)
             drawGhostRed(ghostRedX,ghostRedY);
             
+            
+            
             if(ghostflagBlue==true)
             drawGhostBlue(ghostX, ghostY);
             if(ghostflagBlue==false&&ghostflag==false)
@@ -900,7 +916,7 @@ for(int i=0;i<20;i++)
     }
 
 }
-void outstream(ostringstream& out,int x, int y) {
+void outstream(std::ostringstream& out,int x, int y) {
     char* textCopy = strdup(out.str().c_str());
     settextstyle(SANS_SERIF_FONT,HORIZ_DIR,2);
     outtextxy(x, y, textCopy);
