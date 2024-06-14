@@ -44,6 +44,18 @@ int ghostvy=5; int ghostvx=0;
 int ghostX1=200;int ghostY1=40;
 int highscore;
 
+struct save{
+    int redx;
+    int redy;
+    int pacx;
+    int pacy;
+    int boolred;
+    int boolpink;
+    int pinkx;
+    int pinky;
+};
+
+
 int main()
 {
    std::ifstream infile("highscore-list.txt");
@@ -71,6 +83,7 @@ cout<<highscore;
     srand(time(NULL));
     const int GRID_SIZE=20;
     const int GRID_LENGTH=20;
+    save Save;
     int ghostX=200; int ghostY=200;
     int rx= 30;
     int ry= 30;
@@ -81,6 +94,7 @@ cout<<highscore;
     bool circlepresent=true;
     bool ghostflag=true;
     bool ghostflagRed=true;
+    
     bool ghostflagBlue1=false;
     int ghostvx1=5; int ghostvy1=0;
     bool up,down,left,right; int j=0;
@@ -111,7 +125,8 @@ cout<<highscore;
      object[i][1]=1;
      object[i][19]=1;
     }
-    
+    object[10][1]=0;
+    object[10][19]=0;
 
 
     x[0]=GRID_LENGTH; y[0]=GRID_LENGTH;
@@ -314,6 +329,8 @@ cout<<highscore;
     ghostY-=ghostvy;
     ghostX+=ghostvx;
   
+    
+
     for(int j=0;j<20;j++)
             {
                 for(int i=0;i<20;i++)
@@ -618,11 +635,53 @@ for(int i=0;i<20;i++)
         ghostflagBlue1=false;
         circlepresent=true;
      }
-     
+     if(rx<0)
+     rx=400;
+     if(rx>400)
+     rx=0;
      setrgbpalette(8,0,191,255);
      rectangle(500,500,550,550);
      setfillstyle(1,8);
      floodfill(520,520,WHITE);
+
+    
+    
+     rectangle(500,200,550,225);
+     setfillstyle(SOLID_FILL,YELLOW);
+     floodfill(510,210,WHITE);
+
+     outtextxy(510,210,"Save");
+     if(mousex()>500&&mousex()<550&&mousey()>200&&mousey()<225)
+        if(ismouseclick(WM_LBUTTONDOWN))
+            {
+                Save.redx=ghostX1;
+                Save.redy=ghostY1;
+                Save.pinkx=ghostX;
+                Save.pinky=ghostY;
+                Save.pacx=rx;
+                Save.pacy=ry;
+                Save.boolpink=ghostflag;
+                Save.boolred=ghostflagRed;
+            }
+
+    setfillstyle(SOLID_FILL,BLUE);
+    bar(500,300,550,325);
+    setcolor(WHITE);
+    outtextxy(510,310,"Load");
+    if(mousex()>500&&mousex()<550&&mousey()>300&&mousey()<325)
+        if(ismouseclick(WM_LBUTTONDOWN))
+            {
+              ghostX1 = Save.redx  ;   
+              ghostY1 = Save.redy  ;   
+              ghostX  = Save.pinkx ;  
+              ghostY  = Save.pinky ;  
+              rx      = Save.pacx  ;  
+              ry      = Save.pacy  ;  
+              ghostflag   = Save.boolpink  ;
+              ghostflagRed  = Save.boolred ;                             
+              
+            }
+     
             if(ghostflag==true)
             drawGhost(ghostX,ghostY);
             if(ghostflagBlue==true)
